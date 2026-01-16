@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会话数据传递测试 - 隐式表单域</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .hidden-field-info {
+            background: #fff9e6;
+            border: 1px dashed #ffc107;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .hidden-field-info p {
+            color: #856404;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+        
+        .hidden-field-info code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #d63384;
+            font-family: "Consolas", monospace;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 会话数据传递测试</h1>
+        <p class="subtitle">实验七 - 隐式表单域传输会话数据</p>
+        
+        <div class="info-box">
+            <h3>📋 实验说明</h3>
+            <p>本表单演示如何使用隐式表单域（hidden input）在客户端和服务器之间传递会话数据。会话ID将被隐藏传递到服务器端。</p>
+        </div>
+        
+        <form action="hiddenform.jsp" method="post">
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" name="username" placeholder="请输入您的用户名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">消息内容：</label>
+                <input type="text" id="message" name="message" placeholder="请输入要发送的消息" required>
+            </div>
+            
+            <div class="hidden-field-info">
+                <p><strong>🔒 隐式表单域：</strong></p>
+                <p>字段名称: <code>sessionId</code></p>
+                <p>字段值: <code>winTest123</code></p>
+                <p>说明: 此字段不可见，将自动随表单提交</p>
+            </div>
+            
+            <!-- 隐式表单域：用于传递会话ID -->
+            <input type="hidden" name="sessionId" value="winTest123">
+            
+            <button type="submit">🚀 提交表单</button>
+        </form>
+        
+        <div class="footer">
+            Windows环境 + JDK 8 + Tomcat 9 实验
+        </div>
+    </div>
+</body>
+</html>

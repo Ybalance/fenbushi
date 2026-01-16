@@ -1,0 +1,7 @@
+cd "c:\Users\23654\Desktop\分布式实验\Windows-分布式系统实验-实验三+实验四+实验七\实验七-Internet应用"
+python simple_http_server.py
+
+cd "c:\Users\23654\Desktop\分布式实验\Windows-分布式系统实验-实验三+实验四+实验七\实验七-Internet应用\SocketHTTP"
+java HttpSocketClient
+
+http://localhost:8080

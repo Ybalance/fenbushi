@@ -1,0 +1,5 @@
+cd "c:\Users\23654\Desktop\分布式实验\Windows-分布式系统实验-实验三+实验四+实验七\实验四-RMI_API\server"
+java SomeServer
+
+cd "c:\Users\23654\Desktop\分布式实验\Windows-分布式系统实验-实验三+实验四+实验七\实验四-RMI_API\client"
+java SomeClient

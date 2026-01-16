@@ -1,0 +1,136 @@
+========================================
+  实验七 - Internet应用部署说明
+========================================
+
+【实验内容】
+1. Socket API实现HTTP客户端
+2. 隐式表单域传输会话数据
+
+========================================
+  部分一：HTTP Socket客户端
+========================================
+
+【文件位置】
+SocketHTTP/HttpSocketClient.java
+
+【编译运行步骤】
+1. 确保Tomcat已启动（端口8080）
+   - 进入Tomcat安装目录的bin文件夹
+   - 双击 startup.bat 启动Tomcat
+   - 浏览器访问 http://localhost:8080 验证
+
+2. 编译Java程序
+   cd SocketHTTP
+   javac HttpSocketClient.java
+
+3. 运行程序
+   java HttpSocketClient
+
+【预期结果】
+- 程序会连接到 localhost:8080
+- 发送HTTP GET请求
+- 接收并显示Tomcat首页的HTML源码
+
+========================================
+  部分二：隐式表单域传输会话数据
+========================================
+
+【文件位置】
+FormCookie/form.html
+FormCookie/hiddenform.jsp
+
+【部署步骤】
+1. 找到Tomcat安装目录
+   例如: C:\apache-tomcat-9.0.x
+
+2. 将文件复制到webapps\ROOT目录
+   复制 form.html 到: C:\apache-tomcat-9.0.x\webapps\ROOT\
+   复制 hiddenform.jsp 到: C:\apache-tomcat-9.0.x\webapps\ROOT\
+
+3. 确保Tomcat正在运行
+   如未启动，运行 bin\startup.bat
+
+【测试步骤】
+1. 打开浏览器，访问:
+   http://localhost:8080/form.html
+
+2. 填写表单内容:
+   - 用户名: 输入任意用户名（如"张三"）
+   - 消息内容: 输入任意消息（如"测试消息"）
+
+3. 点击"提交表单"按钮
+
+4. 验证结果页面显示:
+   ✓ 会话ID: winTest123（隐式传递）
+   ✓ 用户名和消息内容正确显示
+   ✓ 接收时间、客户端IP等信息
+
+【隐式表单域说明】
+- 字段名: sessionId
+- 字段值: winTest123
+- HTML代码: <input type="hidden" name="sessionId" value="winTest123">
+- 特点: 在表单页面不可见，但会随表单一起提交到服务器
+
+========================================
+  常见问题排查
+========================================
+
+【问题1】HttpSocketClient连接失败
+原因: Tomcat未启动或端口8080被占用
+解决:
+  - 启动Tomcat
+  - 检查端口占用: netstat -ano | findstr 8080
+  - 修改HttpSocketClient.java中的端口号
+
+【问题2】浏览器访问form.html显示404
+原因: 文件未正确部署到Tomcat
+解决:
+  - 确认文件在 webapps\ROOT 目录下
+  - 检查文件名大小写是否正确
+  - 重启Tomcat
+
+【问题3】hiddenform.jsp显示乱码
+原因: 字符编码问题
+解决:
+  - 确认JSP文件保存为UTF-8编码
+  - 检查pageEncoding="UTF-8"设置
+
+【问题4】隐式表单域值为null
+原因: 表单action路径错误或name属性不匹配
+解决:
+  - 确认action="hiddenform.jsp"正确
+  - 确认input的name="sessionId"与JSP中getParameter("sessionId")一致
+
+========================================
+  实验验收要点
+========================================
+
+1. HTTP Socket客户端能够成功连接Tomcat，显示HTML源码
+2. 表单页面正常显示，样式美观
+3. 提交表单后能够跳转到结果页面
+4. 结果页面正确显示会话ID "winTest123"
+5. 用户名和消息内容正确传递和显示
+6. 理解隐式表单域的作用和传递机制
+
+========================================
+  报告撰写提示
+========================================
+
+1. 截图内容:
+   - HttpSocketClient运行结果（显示HTTP响应）
+   - 浏览器访问form.html的界面
+   - 填写表单内容的截图
+   - hiddenform.jsp结果页面
+   - 浏览器开发者工具查看Network请求（可选）
+
+2. 代码分析:
+   - HttpSocketClient发送HTTP请求的代码片段
+   - form.html中隐式表单域的HTML代码
+   - hiddenform.jsp接收参数的JSP代码
+
+3. 原理说明:
+   - HTTP协议基础（请求/响应格式）
+   - 隐式表单域的作用和使用场景
+   - GET/POST请求的区别
+
+========================================
